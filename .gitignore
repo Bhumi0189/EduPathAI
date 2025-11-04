@@ -1,0 +1,206 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDEs
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Coverage
+coverage/
+
+# Misc caches
+.cache/
+
+# OneDrive/Windows temp
+~$*
+~*.*
+*.lnk
+*.tmp
+.~lock.*
+
+
+
+#project struture
+
+
+Task Completed
+Based on the recursive file listing, here's the organized project structure for the EduPathAi project (a Next.js application with TypeScript, Tailwind CSS, and various features like AI coaching, authentication, chat, quizzes, etc.):
+
+Root Directory
+.gitignore
+components.json
+next.config.mjs
+package-lock.json
+package.json
+pnpm-lock.yaml
+postcss.config.mjs
+tailwind.config.ts
+tsconfig.json
+app/ (Next.js App Router)
+globals.css
+layout.tsx
+page.tsx
+ai-coach/
+page.tsx
+api/
+auth/
+login/
+route.ts
+logout/
+route.ts
+me/
+route.ts
+register/
+route.ts
+chat/
+route.ts
+chatbot/
+route.ts
+coach/
+ask/
+route.ts
+plan/
+route.ts
+resources/
+route.ts
+learning-style/
+route.ts
+progress/
+route.ts
+resources/
+route.ts
+auth/
+page.tsx
+career-path/
+page.tsx
+chat/
+page.tsx
+components/
+Bubbles.tsx
+CursorGlow.tsx
+SmokeBackground.tsx
+dashboard/
+loading.tsx
+page.tsx
+login/
+page.tsx
+profile/
+page.tsx
+quiz/
+page.tsx
+gamified/
+page.tsx
+register/
+page.tsx
+resources/
+loading.tsx
+page.tsx
+vr-learning/
+page.tsx
+assessment/
+page.tsx
+collaborative/
+page.tsx
+components/ (Reusable Components)
+AnimatedSphere.tsx
+auth-guard.tsx
+BotpressChat.tsx
+theme-provider.tsx
+ui/ (UI Components from shadcn/ui)
+accordion.tsx
+alert-dialog.tsx
+alert.tsx
+aspect-ratio.tsx
+avatar.tsx
+badge.tsx
+breadcrumb.tsx
+button.tsx
+calendar.tsx
+card.tsx
+carousel.tsx
+chart.tsx
+checkbox.tsx
+collapsible.tsx
+command.tsx
+context-menu.tsx
+dialog.tsx
+drawer.tsx
+dropdown-menu.tsx
+form.tsx
+hover-card.tsx
+input-otp.tsx
+input.tsx
+label.tsx
+menubar.tsx
+navigation-menu.tsx
+pagination.tsx
+popover.tsx
+progress.tsx
+radio-group.tsx
+resizable.tsx
+scroll-area.tsx
+select.tsx
+separator.tsx
+sheet.tsx
+sidebar.tsx
+skeleton.tsx
+slider.tsx
+sonner.tsx
+switch.tsx
+table.tsx
+tabs.tsx
+textarea.tsx
+toast.tsx
+toaster.tsx
+toggle-group.tsx
+toggle.tsx
+tooltip.tsx
+use-mobile.tsx
+use-toast.ts
+hooks/ (Custom Hooks)
+use-mobile.tsx
+use-toast.ts
+useEduAssistant.ts
+lib/ (Utilities and Configurations)
+auth-context.tsx
+auth.ts
+mongodb.ts
+utils.ts
+public/ (Static Assets)
+placeholder-logo.png
+placeholder-logo.svg
+placeholder-user.jpg
+placeholder.jpg
+placeholder.svg
+styles/ (Additional Styles)
+globals.css
