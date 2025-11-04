@@ -1,0 +1,22 @@
+2. File Structure:
+app/
+├── vr-learning/
+│   └── page.tsx
+├── globals.css (updated)
+└── layout.tsx (updated)
+
+components/
+├── AnimatedBackground.tsx
+├── VRLearningHub.tsx
+├── VRVideoPlayer.tsx
+└── VRCourseModal.tsx
+
+hooks/
+├── useVRSupport.ts
+└── useVRAnalytics.ts
+
+lib/
+└── vr-utils.ts
+
+types/
+└── vr.ts
