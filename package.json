@@ -91,7 +91,7 @@
   },
   "pnpm": {
     "overrides": {
-      "mongodb": "6.10.0"
+      "mongodb": "^7.5.0"
     }
   }
 }

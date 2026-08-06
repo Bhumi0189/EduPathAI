@@ -16,9 +16,9 @@ const nextConfig = {
 
   // Handle Three.js and other VR dependencies
   webpack: (config, { isServer }) => {
-    // Handle Three.js on server side
+    // Handle Three.js and database libraries on server side
     if (isServer) {
-      config.externals.push('three');
+      config.externals.push('three', 'mongodb', 'mongoose');
     }
     
     // Optimize Three.js bundle
