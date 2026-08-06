@@ -2,6 +2,9 @@ import { type NextRequest, NextResponse } from "next/server"
 import { getDatabase } from "@/lib/mongodb"
 import { getAuthUser, type User } from "@/lib/auth"
 
+// Opt out of static generation since this route uses dynamic request headers
+export const dynamic = 'force-dynamic'
+
 export async function GET(request: NextRequest) {
   try {
     const authUser = await getAuthUser(request)
