@@ -7,7 +7,13 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  
+
+  // Fix: prevent mongodb/mongoose from being bundled by webpack
+  // (fixes "Module not found: Default condition should be last one")
+  experimental: {
+    serverComponentsExternalPackages: ['mongodb', 'mongoose'],
+  },
+
   // Handle Three.js and other VR dependencies
   webpack: (config, { isServer }) => {
     // Handle Three.js on server side
