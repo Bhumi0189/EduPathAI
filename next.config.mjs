@@ -16,9 +16,9 @@ const nextConfig = {
 
   // Handle Three.js and other VR dependencies
   webpack: (config, { isServer }) => {
-    // Handle Three.js and database libraries on server side
+    // Externalize database and Three.js libraries on server side
     if (isServer) {
-      config.externals.push('three', 'mongodb', 'mongoose');
+      config.externals = [...(config.externals || []), 'mongodb', 'mongoose', 'three'];
     }
     
     // Optimize Three.js bundle
@@ -26,6 +26,10 @@ const nextConfig = {
       ...config.resolve.alias,
       'three/examples/jsm': 'three/examples/jsm'
     };
+    
+    // Prevent webpack from bundling mongodb
+    config.ignoreWarnings = config.ignoreWarnings || [];
+    config.ignoreWarnings.push({ module: /mongodb/ });
     
     return config;
   },
