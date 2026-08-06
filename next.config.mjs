@@ -16,10 +16,37 @@ const nextConfig = {
 
   // Handle Three.js and other VR dependencies
   webpack: (config, { isServer }) => {
-    // Externalize database and Three.js libraries on server side
-    if (isServer) {
-      config.externals = [...(config.externals || []), 'mongodb', 'mongoose', 'three'];
+    // Ensure database libraries are never bundled
+    config.externals = config.externals || [];
+    if (typeof config.externals === 'function') {
+      const originalExternals = config.externals;
+      config.externals = async (ctx, callback) => {
+        const dbPackages = ['mongodb', 'mongoose', 'bson', 'saslprep', 'kerberos', 'snappy', 'aws4'];
+        if (dbPackages.includes(ctx.request)) {
+          return callback(null, `require("${ctx.request}")`);
+        }
+        return originalExternals(ctx, callback);
+      };
+    } else {
+      config.externals = [
+        ...config.externals,
+        'mongodb',
+        'mongoose',
+        'bson',
+        'saslprep',
+        'kerberos',
+        'snappy',
+        'aws4'
+      ];
     }
+    
+    // Add fallback for database modules if they appear in browser
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      'mongodb': false,
+      'mongoose': false,
+      'bson': false,
+    };
     
     // Optimize Three.js bundle
     config.resolve.alias = {
@@ -27,9 +54,12 @@ const nextConfig = {
       'three/examples/jsm': 'three/examples/jsm'
     };
     
-    // Prevent webpack from bundling mongodb
-    config.ignoreWarnings = config.ignoreWarnings || [];
-    config.ignoreWarnings.push({ module: /mongodb/ });
+    // Ignore MongoDB warnings
+    config.ignoreWarnings = [
+      ...( config.ignoreWarnings || []),
+      { module: /mongodb/ },
+      { module: /mongoose/ }
+    ];
     
     return config;
   },
