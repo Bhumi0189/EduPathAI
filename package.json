@@ -60,7 +60,7 @@
     "input-otp": "1.4.1",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.454.0",
-    "mongoose": "latest",
+    "mongoose": "8.9.0",
     "next": "14.2.16",
     "next-themes": "^0.4.4",
     "react": "^18",
@@ -88,5 +88,10 @@
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "overrides": {
+      "mongodb": "6.10.0"
+    }
   }
 }
