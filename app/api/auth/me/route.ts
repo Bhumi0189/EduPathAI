@@ -1,7 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { getDatabase } from "@/lib/mongodb"
 import { getAuthUser, type User } from "@/lib/auth"
-import { ObjectId } from "mongodb"
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,6 +12,9 @@ export async function GET(request: NextRequest) {
 
     const db = await getDatabase()
     const users = db.collection<User>("users")
+    
+    // Dynamically import ObjectId to prevent webpack bundling of mongodb
+    const { ObjectId } = await import("mongodb")
 
     const user = await users.findOne(
       ({ _id: new ObjectId(authUser.userId) } as any),
