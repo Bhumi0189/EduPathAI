@@ -21,6 +21,7 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
+import Script from "next/script";
 import { useState, useEffect } from "react";
 import RootLayout from "@/components/RootLayout";
 import { SmokeBackground } from "./components/smoke-background";
@@ -113,6 +114,10 @@ function LandingPageContent() {
 
   return (
     <div className="min-h-screen bg-black text-white relative">
+      <Script
+        src="https://www.noupe.com/embed/01a11185873070008d8466664da89e6161c7.js"
+        strategy="afterInteractive"
+      />
       <SmokeBackground />
       <CursorGlow />
       {/* Navigation */}
