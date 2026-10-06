@@ -141,7 +141,7 @@ export default function VoiceAssistantPage() {
               </div>
             </div>
           </div>
-          <div className="coach-session-row"><div className="flex items-center gap-2 text-xs text-slate-400"><Activity size={14} className="text-cyan-300" /> {liveTranscript || 'I’m listening, Anshu...'}</div></div>
+          <div className="coach-session-row"><div className="flex items-center gap-2 text-xs text-slate-400"><Activity size={14} className="text-cyan-300" /> {liveTranscript || 'I’m listening, ...'}</div></div>
         </motion.section>
       </div>
     </motion.main>
