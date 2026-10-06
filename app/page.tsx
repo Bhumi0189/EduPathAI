@@ -147,7 +147,7 @@ function LandingPageContent() {
                 onClick={() => scrollToSection("vr-learning")}
                 className="text-gray-300 hover:text-white transition-colors"
               >
-                VR Learning
+                Courses
               </button>
               <button
                 onClick={() => scrollToSection("pricing")}
@@ -194,7 +194,7 @@ function LandingPageContent() {
                   onClick={() => scrollToSection("vr-learning")}
                   className="text-gray-300 hover:text-white transition-colors text-left"
                 >
-                  VR Learning
+                  Courses
                 </button>
                 <button
                   onClick={() => scrollToSection("pricing")}
@@ -281,8 +281,8 @@ function LandingPageContent() {
 
 
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-              Transform your learning journey with personalized AI coaching, immersive VR experiences, and adaptive
-              learning paths tailored just for you.
+              Transform your learning journey with personalized AI coaching, structured courses, and adaptive learning
+              paths tailored just for you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/auth?redirectTo=/Model3D">
@@ -325,8 +325,8 @@ function LandingPageContent() {
               },
               {
                 icon: Gamepad2,
-                title: "Immersive VR Learning",
-                description: "Step into virtual worlds and experience hands-on learning like never before.",
+                title: "Structured Course Learning",
+                description: "Follow practical lessons, guided exercises, and clear milestones at your own pace.",
                 color: "purple",
               },
               {
@@ -442,7 +442,7 @@ function LandingPageContent() {
                     <div className="flex-1">
                       <p className="text-white font-medium">AI Coach</p>
                       <p className="text-gray-300 text-sm">
-                        I've created a 5-day plan with interactive exercises and VR labs. Let's start!
+                        I've created a 5-day plan with interactive exercises and guided lessons. Let's start!
                       </p>
                     </div>
                   </div>
@@ -453,7 +453,7 @@ function LandingPageContent() {
         </div>
       </section>
 
-      {/* VR Learning Section */}
+      {/* Courses Section */}
       <section id="vr-learning" className="py-20 px-6">
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -484,18 +484,18 @@ function LandingPageContent() {
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <Badge className="mb-4 bg-purple-500/20 text-purple-400 border-purple-500/30">Immersive Technology</Badge>
-              <h2 className="text-4xl font-bold mb-6">Learn Through Virtual Reality</h2>
+              <Badge className="mb-4 bg-purple-500/20 text-purple-400 border-purple-500/30">Guided Course Library</Badge>
+              <h2 className="text-4xl font-bold mb-6">Learn Through Practical Courses</h2>
               <p className="text-gray-300 text-lg mb-8">
-                Step into immersive virtual environments where abstract concepts become tangible experiences. From
-                exploring molecular structures to walking through historical events.
+                Follow clear, structured lessons where abstract concepts become understandable through examples,
+                practice, and progress you can see.
               </p>
               <div className="space-y-4">
                 {[
-                  "Interactive 3D learning environments",
-                  "Hands-on experiments in safe virtual labs",
-                  "Collaborative VR study sessions",
-                  "Compatible with all major VR headsets",
+                  "Short lessons with clear learning goals",
+                  "Practice exercises and knowledge checks",
+                  "Progress tracking across every course",
+                  "Learn on any laptop or mobile device",
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-green-400" />
@@ -505,7 +505,7 @@ function LandingPageContent() {
               </div>
               <Link href="/auth?redirectTo=/vr-learning">
                 <Button className="mt-8 bg-purple-600 hover:bg-purple-700">
-                  Explore VR Learning
+                  Explore Courses
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
@@ -655,7 +655,7 @@ function LandingPageContent() {
                 name: "Marcus Johnson",
                 role: "Medical Student",
                 content:
-                  "The VR anatomy lessons are incredible! I can explore the human body in 3D and understand complex structures like never before.",
+                  "The anatomy courses are incredible! The clear lessons help me understand complex structures step by step.",
                 rating: 5,
               },
               {
@@ -705,7 +705,7 @@ function LandingPageContent() {
                 price: "0",
                 period: "forever",
                 description: "Perfect for getting started",
-                features: ["Basic AI coaching", "5 VR experiences per month", "Community access", "Progress tracking"],
+                features: ["Basic AI coaching", "Course library access", "Community access", "Progress tracking"],
                 cta: "Get Started",
                 popular: false,
               },
@@ -716,7 +716,7 @@ function LandingPageContent() {
                 description: "For serious learners",
                 features: [
                   "Advanced AI coaching",
-                  "Unlimited VR experiences",
+                  "Unlimited course access",
                   "Personalized learning paths",
                   "Priority support",
                   "Offline content",
@@ -834,7 +834,7 @@ function LandingPageContent() {
                   <button onClick={() => scrollToSection("ai-coach")}>AI Coach</button>
                 </li>
                 <li>
-                  <button onClick={() => scrollToSection("vr-learning")}>VR Learning</button>
+                  <button onClick={() => scrollToSection("vr-learning")}>Courses</button>
                 </li>
                 <li>
                   <button onClick={() => scrollToSection("pricing")}>Pricing</button>
