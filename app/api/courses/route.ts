@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { ObjectId } from "mongodb"
 import { getDatabase } from "@/lib/mongodb"
 
 const catalog = [
@@ -14,19 +15,42 @@ const catalog = [
 
 const clamp = (value: unknown) => Math.max(0, Math.min(100, Math.round(Number(value) || 0)))
 
+const seedLessons = (course: any) => Array.from({ length: course.lessons }, (_, index) => ({
+  courseId: course.id,
+  order: index + 1,
+  title: `${index === 0 ? "Getting started: " : "Lesson "}${index + 1} - ${course.subject} essentials`,
+  type: index % 3 === 1 ? "assignment" : index % 3 === 2 ? "quiz" : "lecture",
+  duration: `${12 + (index % 5) * 4} min`,
+  content: `Explore ${course.subject.toLowerCase()} through a focused explanation, a practical example, and one clear next step. This lesson builds toward the skills in ${course.title}.`,
+  assignment: "Write three key ideas from this lesson and explain how you would use one in a real situation.",
+  quiz: [{ question: `Which idea is central to this ${course.subject.toLowerCase()} lesson?`, options: ["The core concept", "A random detail", "An unrelated topic"], answer: 0 }],
+}))
+
+async function ensureCatalog(db: any) {
+  const courses = db.collection("courses")
+  if (await courses.countDocuments() === 0) await courses.insertMany(catalog.map((course) => ({ ...course, createdAt: new Date(), updatedAt: new Date() })))
+  const storedCourses = await courses.find({}).sort({ createdAt: 1 }).toArray()
+  const lessons = db.collection("courseLessons")
+  for (const course of storedCourses) {
+    if (await lessons.countDocuments({ courseId: course.id }) === 0) await lessons.insertMany(seedLessons(course))
+  }
+  return storedCourses
+}
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
     const userId = searchParams.get("userId")
     const db = await getDatabase()
-    const courses = db.collection("courses")
-    const existingCount = await courses.countDocuments()
-
-    if (existingCount === 0) {
-      await courses.insertMany(catalog.map((course) => ({ ...course, createdAt: new Date(), updatedAt: new Date() })))
+    const storedCourses = await ensureCatalog(db)
+    const courseId = searchParams.get("courseId")
+    if (courseId) {
+      const course = storedCourses.find((item: any) => item.id === courseId)
+      if (!course) return NextResponse.json({ error: "Course not found" }, { status: 404 })
+      const lessons = await db.collection("courseLessons").find({ courseId }).sort({ order: 1 }).toArray()
+      const progress = userId ? await db.collection("courseProgress").findOne({ userId, courseId }) : null
+      return NextResponse.json({ course, lessons, progress: progress || { progress: 0, completedLessonIds: [] } })
     }
-
-    const storedCourses = await courses.find({}).sort({ createdAt: 1 }).toArray()
     const progressMap = new Map<string, { progress: number; completedLessons: number }>()
 
     if (userId) {
@@ -73,9 +97,23 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const { userId, courseId, progress = 0, completedLessons = 0 } = await request.json()
+    const { userId, courseId, lessonId, progress = 0, completedLessons = 0 } = await request.json()
     if (!userId || !courseId) return NextResponse.json({ error: "userId and courseId are required" }, { status: 400 })
     const db = await getDatabase()
+    if (lessonId) {
+      const course = await db.collection("courses").findOne({ id: courseId }) as any
+      const lesson = ObjectId.isValid(lessonId) ? await db.collection("courseLessons").findOne({ _id: new ObjectId(lessonId), courseId }) : null
+      if (!course || !lesson) return NextResponse.json({ error: "Lesson not found" }, { status: 404 })
+      const current = await db.collection("courseProgress").findOne({ userId, courseId }) as any
+      const completedLessonIds = Array.from(new Set([...(current?.completedLessonIds || []), lessonId]))
+      const nextProgress = Math.round((completedLessonIds.length / course.lessons) * 100)
+      await db.collection("courseProgress").updateOne(
+        { userId, courseId },
+        { $set: { progress: nextProgress, completedLessons: completedLessonIds.length, completedLessonIds, updatedAt: new Date() }, $setOnInsert: { userId, courseId, enrolledAt: new Date() } },
+        { upsert: true },
+      )
+      return NextResponse.json({ success: true, progress: nextProgress, completedLessons: completedLessonIds.length, completedLessonIds })
+    }
     await db.collection("courseProgress").updateOne(
       { userId, courseId },
       { $set: { progress: clamp(progress), completedLessons: Math.max(0, Number(completedLessons) || 0), updatedAt: new Date() }, $setOnInsert: { userId, courseId, enrolledAt: new Date() } },

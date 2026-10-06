@@ -503,7 +503,7 @@ function LandingPageContent() {
                   </div>
                 ))}
               </div>
-              <Link href="/auth?redirectTo=/vr-learning">
+              <Link href="/auth?redirectTo=/learning">
                 <Button className="mt-8 bg-purple-600 hover:bg-purple-700">
                   Explore Courses
                   <ArrowRight className="ml-2 h-4 w-4" />

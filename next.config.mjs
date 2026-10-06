@@ -93,7 +93,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/vr-learning/:path*',
+        source: '/learning/:path*',
         headers: [
           {
             key: 'Cross-Origin-Embedder-Policy',
@@ -108,16 +108,18 @@ const nextConfig = {
     ];
   },
   
-  // Handle VR learning routes
-  async rewrites() {
+  // Keep old course links working after the route rename.
+  async redirects() {
     return [
       {
         source: '/vr-learning',
-        destination: '/vr-learning'
+        destination: '/learning',
+        permanent: true
       },
       {
         source: '/vr-learning/:path*',
-        destination: '/vr-learning/:path*'
+        destination: '/learning/:path*',
+        permanent: true
       }
     ];
   },

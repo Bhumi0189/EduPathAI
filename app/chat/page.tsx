@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Script from "next/script";
 import { useRouter } from "next/navigation";
+import { ArrowLeft, History, Mic, MicOff, Sparkles, Trash2 } from "lucide-react";
 import { SmokeBackground } from "../components/smoke-background";
 import { CursorGlow } from "../components/cursor-glow";
 
@@ -80,28 +81,6 @@ export default function ChatPage() {
         window.botpress.open();
         setLoading(false);
 
-        const footer = document.querySelector(
-          "#webchat .bpWebchat-footer"
-        );
-        if (footer && !document.getElementById("back-home-btn")) {
-          const btn = document.createElement("button");
-          btn.id = "back-home-btn";
-          btn.innerText = "⬅ Back to Home";
-          btn.style.background =
-            "linear-gradient(to right, #3b82f6, #8b5cf6)";
-          btn.style.color = "white";
-          btn.style.padding = "8px 14px";
-          btn.style.border = "none";
-          btn.style.borderRadius = "6px";
-          btn.style.cursor = "pointer";
-          btn.style.marginLeft = "10px";
-
-          btn.onclick = () => {
-            router.push("/");
-          };
-
-          footer.appendChild(btn);
-        }
       });
 
       // On new conversation
@@ -217,38 +196,43 @@ export default function ChatPage() {
         }}
       />
 
-      <div className="relative w-screen h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 flex flex-col overflow-hidden">
+      <div className="chat-page relative min-h-screen h-dvh bg-black flex flex-col overflow-hidden text-white">
         <SmokeBackground />
         <CursorGlow />
+        <header className="chat-topbar">
+          <button className="chat-brand" onClick={() => router.push("/")} aria-label="Back to home">
+            <span className="chat-brand-mark"><Sparkles size={17} /></span>
+            <span>EduPath <b>AI</b></span>
+          </button>
+          <div className="chat-title"><span className="chat-status-dot" /> EduPath AI Tutor <small>{loading ? "Connecting" : "Online"}</small></div>
+          <div className="chat-actions">
+            <button className="chat-icon-button" onClick={toggleHistory} aria-label="Toggle chat history" title="Chat history"><History size={16} /></button>
+            <button className={`chat-icon-button ${isRecording ? "active" : ""}`} onClick={isRecording ? stopRecording : startRecording} aria-label={isRecording ? "Stop recording" : "Start voice input"} title={isRecording ? "Stop recording" : "Voice input"}>{isRecording ? <MicOff size={16} /> : <Mic size={16} />}</button>
+            <button className="chat-icon-button danger" onClick={clearHistory} aria-label="Clear chat history" title="Clear history"><Trash2 size={16} /></button>
+          </div>
+        </header>
         <div
           id="webchat"
-          className="w-full h-full rounded-lg shadow-lg bg-opacity-90 backdrop-blur-md"
+          className="chat-shell"
           style={{
             width: "100%",
-            height: "100%",
-            background:
-              "linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(30, 30, 30, 0.9))",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
+            height: "calc(100% - 4.25rem)",
           }}
         />
 
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
             <div className="text-white text-lg font-medium animate-pulse">
-              Loading Chatbot...
+              <Sparkles className="mx-auto mb-3 text-cyan-300" size={24} />
+              Connecting to your AI tutor...
             </div>
           </div>
         )}
 
-        <div className="absolute top-4 left-4 flex items-center space-x-4">
-          <img
-            src="/placeholder-logo.svg"
-            alt="EduPathAI Logo"
-            className="w-10 h-10"
-          />
+        <div className="absolute left-4 top-[4.7rem] z-40 flex items-start">
           {showHistory && (
-            <div className="mt-4 p-4 bg-gray-800 text-white rounded-lg shadow-lg max-h-96 overflow-y-auto">
-              <h3 className="text-lg font-semibold mb-2">Chat History</h3>
+            <div className="chat-history-panel">
+              <h3><History size={15} /> Chat History</h3>
               {chatHistory.length > 0 ? (
                 <ul className="space-y-2">
                   {chatHistory.map((message, index) => (
@@ -269,20 +253,90 @@ export default function ChatPage() {
       </div>
 
       <style jsx global>{`
-        #webchat .bpWebchat {
+        .chat-page {
+          background: radial-gradient(circle at 50% 15%, rgba(14, 116, 144, 0.16), transparent 34%), #03070d;
+        }
+        .chat-topbar {
+          position: relative;
+          z-index: 60;
+          display: flex;
+          height: 4.25rem;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+          padding: 0 1.25rem;
+          background: rgba(3, 7, 13, 0.75);
+          backdrop-filter: blur(18px);
+        }
+        .chat-brand, .chat-title, .chat-actions { display: inline-flex; align-items: center; }
+        .chat-brand { gap: 0.55rem; color: white; font-size: 0.9rem; font-weight: 700; }
+        .chat-brand b { color: #67e8f9; }
+        .chat-brand-mark { display: inline-flex; height: 1.8rem; width: 1.8rem; align-items: center; justify-content: center; border: 1px solid rgba(103, 232, 249, 0.65); border-radius: 0.55rem; color: #67e8f9; background: rgba(34, 211, 238, 0.1); }
+        .chat-title { gap: 0.5rem; color: #cbd5e1; font-size: 0.75rem; }
+        .chat-title small { color: #64748b; font-size: 0.65rem; }
+        .chat-status-dot { height: 0.42rem; width: 0.42rem; border-radius: 999px; background: #6ee7b7; box-shadow: 0 0 10px #6ee7b7; }
+        .chat-actions { gap: 0.4rem; }
+        .chat-icon-button { display: inline-flex; height: 2rem; width: 2rem; align-items: center; justify-content: center; border: 1px solid rgba(148, 163, 184, 0.18); border-radius: 0.55rem; color: #94a3b8; background: rgba(15, 23, 42, 0.45); transition: color 180ms ease, border 180ms ease, background 180ms ease; }
+        .chat-icon-button:hover, .chat-icon-button.active { border-color: rgba(103, 232, 249, 0.5); color: #67e8f9; background: rgba(8, 47, 73, 0.55); }
+        .chat-icon-button.danger:hover { border-color: rgba(251, 113, 133, 0.45); color: #fda4af; background: rgba(127, 29, 29, 0.25); }
+        .chat-shell { position: relative; z-index: 10; margin: 0 auto; max-width: 1100px; border-right: 1px solid rgba(148, 163, 184, 0.12); border-left: 1px solid rgba(148, 163, 184, 0.12); background: transparent; }
+        .chat-history-panel { width: min(21rem, calc(100vw - 2rem)); max-height: min(28rem, calc(100vh - 6rem)); overflow-y: auto; border: 1px solid rgba(103, 232, 249, 0.2); border-radius: 0.85rem; padding: 1rem; background: rgba(7, 16, 24, 0.94); box-shadow: 0 20px 60px rgba(0,0,0,0.35); backdrop-filter: blur(16px); }
+        .chat-history-panel h3 { display: flex; align-items: center; gap: 0.45rem; margin-bottom: 0.75rem; color: white; font-size: 0.85rem; }
+        .chat-history-panel ul { display: grid; gap: 0.5rem; }
+        .chat-history-panel li { border: 1px solid rgba(148, 163, 184, 0.12); border-radius: 0.55rem; padding: 0.55rem; color: #cbd5e1; background: rgba(15, 23, 42, 0.65); font-size: 0.72rem; line-height: 1.45; }
+        .chat-history-panel p { color: #64748b; font-size: 0.75rem; }
+        #webchat,
+        #webchat .bpWebchat,
+        #webchat .bpWebchat-container,
+        #webchat .bpWebchat-content {
           position: unset !important;
           width: 100% !important;
           height: 100% !important;
           max-height: 100% !important;
           max-width: 100% !important;
-          border-radius: 12px !important;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          background: transparent !important;
+        }
+        #webchat .bpWebchat-viewport,
+        #webchat .bpWebchat-body,
+        #webchat .bpWebchat-messages,
+        #webchat .bpWebchat-message-list,
+        #webchat .bpWebchat-inner,
+        #webchat .bpWebchat-scroll-container,
+        #webchat .bpWebchat-conversation,
+        #webchat main,
+        #webchat section,
+        #webchat [data-testid*="conversation" i],
+        #webchat [data-testid*="message" i],
+        #webchat [class*="viewport"],
+        #webchat [class*="Viewport"],
+        #webchat [class*="message-list"],
+        #webchat [class*="MessageList"],
+        #webchat [class*="scroll"],
+        #webchat [class*="Scroll"] {
+          background: transparent !important;
+          background-color: transparent !important;
+          box-shadow: none !important;
+        }
+        #webchat [class*="conversation"],
+        #webchat [class*="Conversation"],
+        #webchat [class*="container"],
+        #webchat [class*="Container"] {
+          background-color: transparent !important;
+          box-shadow: none !important;
+        }
+        #webchat [style*="background"],
+        #webchat [style*="background-color"] {
+          background-color: transparent !important;
         }
         #webchat .bpFab {
           display: none !important;
         }
-        #back-home-btn:hover {
-          background: linear-gradient(to right, #2563eb, #7c3aed) !important;
+        @media (max-width: 640px) {
+          .chat-topbar { padding: 0 0.75rem; }
+          .chat-title { display: none; }
+          .chat-brand { font-size: 0.8rem; }
         }
       `}</style>
     </>

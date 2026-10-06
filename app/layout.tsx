@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div className="app-loading-screen"><div className="app-loading-spinner" /><span>Loading EduPath AI...</span></div>}>
           <AuthProviderWrapper>{children}</AuthProviderWrapper>
         </Suspense>
       </body>

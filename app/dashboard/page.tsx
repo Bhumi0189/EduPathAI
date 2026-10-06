@@ -301,7 +301,7 @@ function DashboardContent() {
 
   const quickActions = [
     { icon: MessageCircle, label: "Ask AI Tutor", href: "/ai-chat" },
-    { icon: Gamepad2, label: "VR Learning", href: "/vr-learning" },
+    { icon: Gamepad2, label: "Courses", href: "/learning" },
     { icon: BarChart3, label: "View Progress", href: "/progress" },
     { icon: Users, label: "Study Groups", href: "/groups" },
   ]

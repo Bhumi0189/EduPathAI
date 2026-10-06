@@ -17,6 +17,7 @@ export default function VoiceAssistantPage() {
   const [liveTranscript, setLiveTranscript] = React.useState<string>("");
   const [isCallActive, setIsCallActive] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
+  const [isPageLoading, setIsPageLoading] = React.useState(true);
   const vapiRef = React.useRef<Vapi | null>(null);
 
   const normalizeTranscript = (text: string, finalize = false) => {
@@ -70,6 +71,7 @@ export default function VoiceAssistantPage() {
     vapi.on('call-end', handleCallEnd);
     vapi.on('message', handleMessage);
     vapi.on('error', handleError);
+    setIsPageLoading(false);
 
     return () => {
       vapi.stop();
@@ -98,12 +100,25 @@ export default function VoiceAssistantPage() {
       initial="initial"
       animate="animate"
     >
+      <div className={`coach-loading-screen ${isPageLoading ? 'is-visible' : ''}`} aria-hidden={!isPageLoading}>
+        <div className="coach-loading-card">
+          <div className="coach-loading-orbit"><Sparkles size={20} /></div>
+          <p>Preparing your AI tutor</p>
+          <span>Connecting to the voice workspace...</span>
+          <div className="coach-loading-bar"><i /></div>
+        </div>
+      </div>
       <VoiceOrb />
 
       <div className="coach-grid" aria-hidden="true" />
 
       <div className="relative z-10 mx-auto flex h-full w-full max-w-[1180px] flex-col">
-        <header className="flex shrink-0 items-center">
+        <header className="coach-chat-nav shrink-0">
+          <Link href="/" className="coach-chat-brand">
+            <span className="coach-chat-brand-mark"><Sparkles size={16} /></span>
+            <span>EduPath <b>AI</b></span>
+          </Link>
+          <div className="coach-chat-status"><span className="coach-chat-status-dot" /> EduPath AI Tutor <small>{isCallActive ? 'Connected' : 'Connecting'}</small></div>
           <Link href="/" className="coach-ghost-button"><ArrowLeft size={15} /> Back to home</Link>
         </header>
         <section className="coach-hero shrink-0">
