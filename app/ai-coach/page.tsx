@@ -109,7 +109,7 @@ export default function VoiceAssistantPage() {
         <section className="coach-hero shrink-0">
           <motion.div initial={{ opacity: 0, y: -18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <p className="coach-kicker"><Sparkles size={13} /> Neural voice workspace</p>
-            <h1>Voice Chat UI <span className="coach-hero-inline-subtitle">x EduPath AI</span></h1>
+            <h1>Voice Chat <span className="coach-hero-inline-subtitle">x EduPath AI</span></h1>
           </motion.div>
         </section>
 
