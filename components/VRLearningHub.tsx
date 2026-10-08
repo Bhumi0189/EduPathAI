@@ -517,7 +517,7 @@ const VRLearningHub = () => {
               variant="outline"
               className="border-slate-600 text-slate-300 hover:border-red-500 hover:text-red-400"
             >
-              ✕
+              X
             </Button>
           </div>
           
@@ -701,7 +701,7 @@ const VRLearningHub = () => {
             </Button>
             
             <Button className="bg-gradient-to-r from-red-600 to-pink-600 text-white px-10 py-4 text-lg rounded-xl font-semibold">
-              <span className="mr-3">👓</span>
+              <span className="mr-3">VR</span>
               3D Learning Modes
             </Button>
             
@@ -751,7 +751,7 @@ const VRLearningHub = () => {
                     Featured Course
                   </Badge>
                   <Badge className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1">
-                    👓 3D Mode
+                    3D Mode
                   </Badge>
                   {progressById[filteredVideos[0]?.youtubeId] !== undefined && (
                     <Badge className="absolute bottom-3 left-3 bg-green-600 text-white px-3 py-1">
@@ -823,7 +823,7 @@ const VRLearningHub = () => {
                       </Badge>
                       
                       <Badge className="absolute top-3 right-3 bg-red-600 text-white px-2 py-1 text-xs">
-                        👓 3D
+                        3D
                       </Badge>
                       {progressById[course.youtubeId] !== undefined && (
                         <Badge className="absolute bottom-3 left-3 bg-green-600 text-white px-2 py-1 text-xs">
@@ -883,7 +883,7 @@ const VRLearningHub = () => {
                     <h3 className="text-white font-bold text-xl mb-2">{session.title}</h3>
                     <p className="text-slate-400 mb-4">{session.instructor}</p>
                     <Badge className={session.status === 'live' ? 'bg-red-600 text-white' : 'bg-blue-600 text-white'}>
-                      {session.status === 'live' ? '🔴 LIVE' : '⏰ Upcoming'}
+                      {session.status === 'live' ? 'LIVE' : 'Upcoming'}
                     </Badge>
                   </CardContent>
                 </Card>

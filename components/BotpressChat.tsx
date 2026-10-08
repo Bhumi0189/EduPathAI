@@ -37,7 +37,7 @@ export default function BotpressChat() {
                 "https://files.bpcontent.cloud/2025/08/21/17/20250821171423-3VJYR6PN.css",
             });
           } catch (err) {
-            console.error("❌ Botpress init failed:", err);
+            console.error("Botpress init failed:", err);
           }
         }
       }, 500);
@@ -58,7 +58,7 @@ export default function BotpressChat() {
       <div className="flex flex-col w-screen h-screen bg-black text-white">
         {/* Navbar */}
         <header className="w-full p-4 border-b border-gray-800 flex items-center justify-between bg-[#111]">
-          <h1 className="text-lg font-bold tracking-wide">⚡ EduPath AI</h1>
+          <h1 className="text-lg font-bold tracking-wide">EduPath AI</h1>
           <span className="text-sm opacity-70">
             Your Smart Learning Companion
           </span>

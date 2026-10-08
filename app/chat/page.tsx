@@ -65,7 +65,7 @@ export default function ChatPage() {
           fontFamily: "ADLaM Display",
           radius: 4,
           feedbackEnabled: false,
-          footer: "[⚡ by EduPathAI]",
+          footer: "[by EduPathAI]",
           additionalStylesheetUrl:
             "https://files.bpcontent.cloud/2025/08/21/17/20250821171423-3VJYR6PN.css",
           useSessionStorage: false,

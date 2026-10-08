@@ -104,7 +104,7 @@ const QuizComponent: React.FC<QuizComponentProps> = ({ module, onComplete }) => 
       onComplete(module);
       if (score + (selectedOption === currentQuestion.correct ? 1 : 0) === currentQuiz.length) {
         setTimeout(() => {
-          alert("🎉 Perfect Score! You've mastered this module! 🏆");
+          alert("Perfect Score! You've mastered this module!");
         }, 500);
       }
     }

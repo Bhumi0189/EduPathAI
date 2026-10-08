@@ -94,11 +94,11 @@ function LandingPageContent() {
   //   setError("");
 
   //   try {
-  //     // ✅ Make sure chat is open (optional)
+  //     // Make sure chat is open (optional)
   //     // @ts-ignore
   //     window.botpressWebChat?.sendEvent({ type: "show" });
 
-  //     // ✅ Send message to Botpress conversation
+  //     // Send message to Botpress conversation
   //     // @ts-ignore
   //     window.botpressWebChat?.sendPayload({
   //       type: "text",
@@ -114,10 +114,6 @@ function LandingPageContent() {
 
   return (
     <div className="min-h-screen bg-black text-white relative">
-      <Script
-        src="https://www.noupe.com/embed/01a11185873070008d8466664da89e6161c7.js"
-        strategy="afterInteractive"
-      />
       <SmokeBackground />
       <CursorGlow />
       {/* Navigation */}
@@ -227,7 +223,7 @@ function LandingPageContent() {
               }`}
           >
             <Badge className="mb-6 bg-blue-500/20 text-blue-400 border-blue-500/30">
-              🚀 The Future of Learning is Here
+              The Future of Learning is Here
             </Badge>
             <h1
               className="relative text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-blue-500 bg-clip-text text-transparent animate-fade-in-up overflow-hidden"

@@ -32,7 +32,7 @@ const ProfilePopover = () => {
     setOpen(false);
   };
 
-  // ✅ If user not logged in, return null (or redirect)
+  // If user not logged in, return null (or redirect)
   if (!user) return null;
 
   return (

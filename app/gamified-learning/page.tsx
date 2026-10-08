@@ -558,7 +558,7 @@ const GameifiedLearningPlatform = () => {
     // Memory Game functions
     const initializeMemoryGame = () => {
         const cards = [
-            '🍎', '🍌', '🍊', '🍇', '🥝', '🍓', '🍑', '🥭'
+            'Apple', 'Banana', 'Orange', 'Grape', 'Kiwi', 'Strawberry', 'Peach', 'Mango'
         ];
 
         const gameCards = [...cards, ...cards]
@@ -1132,7 +1132,7 @@ const GameifiedLearningPlatform = () => {
 
                         {gameCards.every(card => card.matched) && (
                             <div className="mt-6 p-4 bg-green-500/10 border border-green-500/30 rounded-lg text-center">
-                                <h3 className="text-lg font-bold text-green-300 mb-2">Congratulations! 🎉</h3>
+                                <h3 className="text-lg font-bold text-green-300 mb-2">Congratulations!</h3>
                                 <p className="text-green-200">You completed the game in {moves} moves!</p>
                             </div>
                         )}

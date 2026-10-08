@@ -265,17 +265,17 @@ const QuizComponent = ({ module, onComplete }: QuizComponentProps) => {
       <div className="bg-slate-800/95 backdrop-blur-md rounded-2xl p-6 text-white">
         <div className="text-center">
           <Trophy className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-          <h3 className="text-2xl font-bold mb-4">Quiz Completed! 🎉</h3>
+          <h3 className="text-2xl font-bold mb-4">Quiz Completed!</h3>
           <div className="text-4xl font-bold text-blue-400 mb-2">{percentage}%</div>
           <p className="text-lg mb-4">You scored {score} out of {currentQuizData.length}</p>
           
           <div className="mb-6">
             {percentage >= 80 ? (
-              <p className="text-green-400 font-semibold">Excellent work! You're a master! 🌟</p>
+              <p className="text-green-400 font-semibold">Excellent work! You're a master!</p>
             ) : percentage >= 60 ? (
-              <p className="text-yellow-400 font-semibold">Good job! Keep learning! 👍</p>
+              <p className="text-yellow-400 font-semibold">Good job! Keep learning!</p>
             ) : (
-              <p className="text-orange-400 font-semibold">Nice try! Review and try again! 💪</p>
+              <p className="text-orange-400 font-semibold">Nice try! Review and try again!</p>
             )}
           </div>
           
@@ -518,7 +518,7 @@ const ARScene = ({ module, onClose, onComplete }: ARSceneProps) => {
 
   const moduleContent = {
     plant: {
-      title: "🌱 Plant Anatomy Explorer",
+      title: "Plant Anatomy Explorer",
         description: "Explore plants and photosynthesis.",
         instructions: "Rotate the plant to view its parts.",
       facts: [
@@ -529,7 +529,7 @@ const ARScene = ({ module, onClose, onComplete }: ARSceneProps) => {
       ]
     },
     solar: {
-      title: "🌌 Solar System Journey",
+      title: "Solar System Journey",
       description: "Journey through space and discover our amazing solar system!",
       instructions: "Watch the planets orbit and learn about our cosmic neighborhood.",
       facts: [
@@ -540,7 +540,7 @@ const ARScene = ({ module, onClose, onComplete }: ARSceneProps) => {
       ]
     },
     body: {
-      title: "🫀 Human Body Discovery",
+      title: "Human Body Discovery",
       description: "Discover the amazing human body and how all systems work together!",
       instructions: "Explore the human body systems and learn about their vital functions.",
       facts: [
@@ -551,7 +551,7 @@ const ARScene = ({ module, onClose, onComplete }: ARSceneProps) => {
       ]
     },
     coding: {
-      title: "💻 3D Programming World",
+      title: "3D Programming World",
       description: "Dive into the exciting world of programming and computational thinking!",
       instructions: "Explore programming concepts and see how code comes to life in 3D.",
       facts: [
@@ -711,9 +711,9 @@ const ARScene = ({ module, onClose, onComplete }: ARSceneProps) => {
                   <h4 className="font-semibold text-green-200 mb-2">Interactive Tips</h4>
                   <p className="text-sm text-slate-300 mb-3">Use the rotation controls to examine the model from all angles. Each part serves a specific function in the system!</p>
                   <div className="flex gap-2 text-xs text-slate-400">
-                    <span className="bg-slate-700 px-2 py-1 rounded border border-blue-500/30">🔄 Rotate</span>
-                    <span className="bg-slate-700 px-2 py-1 rounded border border-blue-500/30">🔍 Explore</span>
-                    <span className="bg-slate-700 px-2 py-1 rounded border border-blue-500/30">📚 Learn</span>
+                    <span className="bg-slate-700 px-2 py-1 rounded border border-blue-500/30">Rotate</span>
+                    <span className="bg-slate-700 px-2 py-1 rounded border border-blue-500/30">Explore</span>
+                    <span className="bg-slate-700 px-2 py-1 rounded border border-blue-500/30">Learn</span>
                   </div>
                 </div>
               </div>
@@ -815,25 +815,25 @@ export default function ARLearningPage() {
   const modules = [
     {
       id: 'plant',
-      icon: '🌱',
+      icon: 'Plant',
       title: 'Plant Anatomy',
       description: 'Explore the fascinating world of plants! Learn about roots, stems, leaves, and flowers through interactive 3D models and discover the magic of photosynthesis.'
     },
     {
       id: 'solar',
-      icon: '🌌',
+      icon: 'Space',
       title: 'Solar System',
       description: 'Journey through space and discover our amazing solar system! Learn about planets, their sizes, orbital patterns, and the incredible scale of our cosmic neighborhood.'
     },
     {
       id: 'body',
-      icon: '🫀',
+      icon: 'Body',
       title: 'Human Body',
       description: 'Discover the amazing human body! Explore organs, systems, and learn how they work together in perfect harmony to keep us alive and healthy.'
     },
     {
       id: 'coding',
-      icon: '💻',
+      icon: 'Code',
       title: '3D Programming',
       description: 'Dive into the exciting world of programming and computational thinking! Learn coding fundamentals through interactive 3D visualizations and engaging challenges.'
     }
@@ -904,7 +904,7 @@ export default function ARLearningPage() {
 
     if (updatedCompleted.length === modules.length) {
       setTimeout(() => {
-        alert('🎉 Outstanding Achievement! You\'ve mastered all AR Learning modules! 🚀')
+        alert('Outstanding Achievement! You\'ve mastered all AR Learning modules!')
       }, 500)
     }
   };
@@ -976,7 +976,7 @@ export default function ARLearningPage() {
         </div>
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-200 bg-clip-text text-transparent mb-4 drop-shadow-2xl">
-            🚀 AR Learning Platform
+                AR Learning Platform
           </h1>
           <p className="text-xl text-blue-200/90 mb-8 max-w-3xl mx-auto drop-shadow-lg">
             Interactive Education through Augmented Reality - Explore, Learn, Quiz, and Master New Concepts!
@@ -995,7 +995,7 @@ export default function ARLearningPage() {
             </div>
             {progress > 0 && (
               <p className="text-blue-300/80 text-sm mt-2">
-                {progress === 100 ? "🎉 All modules completed! You're a learning champion!" : `${Math.round(progress)}% complete - Keep going!`}
+                {progress === 100 ? "All modules completed! You're a learning champion!" : `${Math.round(progress)}% complete - Keep going!`}
               </p>
             )}
 

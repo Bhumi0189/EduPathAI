@@ -310,17 +310,17 @@ function DashboardContent() {
     { 
       title: "Welcome!", 
       description: "Successfully created your account", 
-      icon: "🎉" 
+      icon: "Welcome" 
     },
     { 
       title: "First Login", 
       description: "Logged in for the first time", 
-      icon: "🚀" 
+      icon: "Login" 
     },
     { 
       title: "Profile Setup", 
       description: "Completed your profile", 
-      icon: "✨" 
+      icon: "Profile" 
     },
   ]
 
