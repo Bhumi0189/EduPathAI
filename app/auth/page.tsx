@@ -12,11 +12,14 @@ import { Brain, Eye, EyeOff, Mail, Lock, User, ArrowRight, AlertCircle } from "l
 import Link from "next/link"
 import { useAuth } from "@/lib/auth-context"
 import { AuthGuard } from "@/components/auth-guard"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 function AuthPageContent() {
   const { login, register } = useAuth()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get("redirectTo") || "/"
+  const defaultTab = searchParams.get("mode") === "signup" ? "signup" : "signin"
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -44,7 +47,7 @@ function AuthPageContent() {
       if (!result.success) {
         setError(result.message || "Login failed")
       } else {
-        router.push("/")
+        router.push(redirectTo)
       }
     } catch (error) {
       setError("An unexpected error occurred")
@@ -73,6 +76,8 @@ function AuthPageContent() {
       const result = await register(registerForm.name, registerForm.email, registerForm.password)
       if (!result.success) {
         setError(result.message || "Registration failed")
+      } else {
+        router.push(redirectTo)
       }
     } catch (error) {
       setError("An unexpected error occurred")
@@ -130,7 +135,7 @@ function AuthPageContent() {
             </Alert>
           )}
 
-          <Tabs defaultValue="signin" className="w-full">
+          <Tabs defaultValue={defaultTab} className="w-full">
             <TabsList className="grid w-full grid-cols-2 bg-white/5 border-white/10">
               <TabsTrigger
                 value="signin"

@@ -55,6 +55,7 @@ function LandingPageContent() {
 
   const { user } = useUser();
   const router = useRouter();
+  const learningHref = user ? "/learning" : "/auth?mode=signup&redirectTo=/learning";
 
   useEffect(() => {
     setIsLoaded(true);
@@ -281,7 +282,7 @@ function LandingPageContent() {
               paths tailored just for you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/auth?redirectTo=/Model3D">
+              <Link href={learningHref}>
                 <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-6">
                   <Play className="mr-2 h-5 w-5" />
                   Start Learning
@@ -789,7 +790,7 @@ function LandingPageContent() {
             Join thousands of learners who are already experiencing the future of education with EduPath AI.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/auth">
+            <Link href={learningHref}>
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-lg px-8 py-6">
                 <Play className="mr-2 h-5 w-5" />
                 Start Learning Now

@@ -22,9 +22,14 @@ const seedLessons = (course: any) => Array.from({ length: course.lessons }, (_, 
   type: index % 3 === 1 ? "assignment" : index % 3 === 2 ? "quiz" : "lecture",
   duration: `${12 + (index % 5) * 4} min`,
   content: `Explore ${course.subject.toLowerCase()} through a focused explanation, a practical example, and one clear next step. This lesson builds toward the skills in ${course.title}.`,
+  ...(course.id === "biology" && index % 3 !== 2 ? { videoId: ["URUJD5NEXC8", "QnQe0xW_JY4", "8IlzKri08kk", "_uAJY1mqtw4", "cQPVXrQ3s1w", "z3whK8r0D0E"][Math.floor(index / 3)] } : {}),
   assignment: "Write three key ideas from this lesson and explain how you would use one in a real situation.",
   quiz: [{ question: `Which idea is central to this ${course.subject.toLowerCase()} lesson?`, options: ["The core concept", "A random detail", "An unrelated topic"], answer: 0 }],
 }))
+
+const addBiologyVideos = (lessons: any[]) => lessons.map((lesson) => lesson.courseId === "biology" && lesson.type === "lecture" && !lesson.videoId
+  ? { ...lesson, videoId: ["URUJD5NEXC8", "QnQe0xW_JY4", "8IlzKri08kk", "_uAJY1mqtw4", "cQPVXrQ3s1w", "z3whK8r0D0E"][Math.floor((lesson.order - 1) / 3)] }
+  : lesson)
 
 async function ensureCatalog(db: any) {
   const courses = db.collection("courses")
@@ -47,7 +52,7 @@ export async function GET(request: Request) {
     if (courseId) {
       const course = storedCourses.find((item: any) => item.id === courseId)
       if (!course) return NextResponse.json({ error: "Course not found" }, { status: 404 })
-      const lessons = await db.collection("courseLessons").find({ courseId }).sort({ order: 1 }).toArray()
+      const lessons = addBiologyVideos(await db.collection("courseLessons").find({ courseId }).sort({ order: 1 }).toArray())
       const progress = userId ? await db.collection("courseProgress").findOne({ userId, courseId }) : null
       return NextResponse.json({ course, lessons, progress: progress || { progress: 0, completedLessonIds: [] } })
     }

@@ -6,10 +6,11 @@ import { ArrowLeft, BookOpen, CheckCircle2, ChevronRight, FileText, HelpCircle, 
 import { useParams } from 'next/navigation';
 import { useUser } from '@/hooks/useUser';
 
-type Lesson = { _id: string; order: number; title: string; type: 'lecture' | 'assignment' | 'quiz'; duration: string; content: string; assignment?: string; quiz?: { question: string; options: string[] }[] };
+type Lesson = { _id: string; order: number; title: string; type: 'lecture' | 'assignment' | 'quiz'; duration: string; content: string; videoId?: string; assignment?: string; quiz?: { question: string; options: string[] }[] };
 
 export default function CourseDetailPage() {
-  const { courseId } = useParams<{ courseId: string }>();
+  const params = useParams<{ courseId: string }>();
+  const courseId = params?.courseId;
   const { user, loading: userLoading } = useUser();
   const [course, setCourse] = useState<any>(null);
   const [lessons, setLessons] = useState<Lesson[]>([]);
